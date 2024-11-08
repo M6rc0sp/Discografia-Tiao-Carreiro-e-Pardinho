@@ -11,3 +11,5 @@ Basta clonar esse repositório e executar o comando abaixo:
 ```
 php -S localhost:8080 -t public/
 ```
+
+<img src="https://github.com/jansenfelipe/top5-tiao-carreiro/blob/master/screenshot.png?raw=true" />
