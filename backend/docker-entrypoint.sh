@@ -28,5 +28,5 @@ fi
 php artisan migrate --force || true
 php artisan db:seed --force || true
 
-# Inicia servidor PHP embutido
-php -S 0.0.0.0:8000 -t public/
+# Inicia servidor de desenvolvimento do Laravel (garante roteamento de /api)
+php artisan serve --host=0.0.0.0 --port=8000
