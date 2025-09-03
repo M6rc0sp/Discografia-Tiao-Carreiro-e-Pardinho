@@ -1,0 +1,5 @@
+body{ font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; padding:1rem; background:#f8fafc }
+.app-container{ max-width:900px; margin:0 auto; background:white; padding:1.25rem; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.06) }
+header h1{ margin:0 0 1rem 0 }
+section h2{ margin-top:0 }
+.pagination{ margin-top:1rem; display:flex; gap:8px; align-items:center }
