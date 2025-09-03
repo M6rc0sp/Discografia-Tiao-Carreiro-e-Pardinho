@@ -1,1 +1,24 @@
-libs/database.sqlite
+# local database from v1
+archive/v1/libs/database.sqlite
+
+# Node and build
+node_modules/
+frontend/node_modules/
+
+# PHP vendor
+backend/vendor/
+
+# Environment files
+.env
+backend/.env
+frontend/.env
+
+# IDE/editor
+.idea/
+.vscode/
+*.swp
+
+# Logs and OS files
+/tmp
+*.log
+.DS_Store
