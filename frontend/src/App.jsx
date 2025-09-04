@@ -1,15 +1,16 @@
 import React from 'react'
 import Songs from './components/Songs'
+import Header from './components/Header'
 
 export default function App(){
   return (
-    <div className="app-container">
-      <header>
-        <h1>Top 5 - Tião Carreiro & Pardinho (v2)</h1>
-      </header>
-      <main>
-        <Songs />
-      </main>
-    </div>
+    <>
+      <Header />
+      <div className="app-container overlap">
+        <main>
+          <Songs />
+        </main>
+      </div>
+    </>
   )
 }

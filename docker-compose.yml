@@ -17,7 +17,7 @@ services:
       - ./frontend:/app:delegated
       - frontend_node_modules:/app/node_modules
     environment:
-      VITE_API_BASE: "http://backend:8000"
+      VITE_API_BASE: "http://localhost:8000"
     depends_on:
       - backend
     command: npm run dev -- --host 0.0.0.0
