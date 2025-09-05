@@ -18,7 +18,10 @@ class SongsTableSeeder extends Seeder
         ];
 
         foreach ($initial as $row) {
-            Song::create($row);
+            // avoid duplicates on re-seed by checking youtube_id
+            if (!Song::where('youtube_id', $row['youtube_id'])->exists()) {
+                Song::create($row);
+            }
         }
     }
 }
