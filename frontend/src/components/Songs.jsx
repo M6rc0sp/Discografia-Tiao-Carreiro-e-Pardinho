@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { api, publicApi, getCurrentUser } from '../api'
+import Container from '@mui/material/Container'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import UiButton from './UiButton'
 
 export default function Songs() {
   const [top, setTop] = useState([])
@@ -58,27 +62,27 @@ export default function Songs() {
   }
 
   return (
-    <div className="container-inner">
-      <div className="submit-form">
-        <h3>Sugerir Nova Música</h3>
+    <Container className="container-inner">
+      <Box className="submit-form" sx={{ mb: 3 }}>
+        <Typography component="h3" variant="h6">Sugerir Nova Música</Typography>
         {/* Formulário sempre disponível: qualquer usuário (anônimo) pode sugerir */}
         {message && <div className={`message ${message.type}`}>{message.text}</div>}
-        <form onSubmit={handleSuggest}>
+        <Box component="form" onSubmit={handleSuggest}>
           <div className="input-group">
-            <input type="url" placeholder="Cole aqui o link do YouTube" value={suggestUrl} onChange={e => setSuggestUrl(e.target.value)} required />
-            <button className="submit-button" type="submit">Enviar Link</button>
+            <input className="submit-input" type="url" placeholder="Cole aqui o link do YouTube" value={suggestUrl} onChange={e => setSuggestUrl(e.target.value)} required />
+            <UiButton className="submit-button" type="submit">Enviar Link</UiButton>
           </div>
-        </form>
-      </div>
+        </Box>
+      </Box>
 
-      <h3 className="section-title">Ranking Atual</h3>
+      <Typography component="h3" variant="h6" className="section-title">Ranking Atual</Typography>
 
       {top.length === 0 && rest.length === 0 ? (
-        <div className="empty-state">
+        <Box className="empty-state" sx={{ textAlign: 'center', py: 4 }}>
           <div className="empty-state-icon">🎵</div>
           <div className="empty-state-text">Nenhuma música cadastrada ainda</div>
           <div className="empty-state-subtext">Seja o primeiro a sugerir uma música usando o formulário acima!</div>
-        </div>
+        </Box>
       ) : (
         <ol className="music-list">
           {top.map((s, idx) => {
@@ -102,7 +106,7 @@ export default function Songs() {
         </ol>
       )}
 
-      <h3 className="section-title">Mais músicas</h3>
+      <Typography component="h3" variant="h6" className="section-title">Mais músicas</Typography>
       <ul className="music-list">
         {rest.map((s, i) => {
           const id = s.id ?? `m-${i}`
@@ -124,11 +128,11 @@ export default function Songs() {
         })}
       </ul>
 
-      <div className="pagination">
-        <button onClick={() => fetchPage(Math.max(1, page - 1))} disabled={page <= 1}>Anterior</button>
+      <Box className="pagination" sx={{ mt: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+        <UiButton className="submit-button" onClick={() => fetchPage(Math.max(1, page - 1))} disabled={page <= 1} aria-disabled={page <= 1}>Anterior</UiButton>
         <span> {page} / {totalPages} </span>
-        <button onClick={() => fetchPage(Math.min(totalPages, page + 1))} disabled={page >= totalPages}>Próxima</button>
-      </div>
-    </div>
+        <UiButton className="submit-button" onClick={() => fetchPage(Math.min(totalPages, page + 1))} disabled={page >= totalPages} aria-disabled={page >= totalPages}>Próxima</UiButton>
+      </Box>
+    </Container>
   )
 }

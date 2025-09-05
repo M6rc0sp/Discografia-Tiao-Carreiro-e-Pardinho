@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { login, getCsrf } from '../api'
+import Container from '@mui/material/Container'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import UiButton from '../components/UiButton'
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -28,20 +32,20 @@ export default function Login() {
   }
 
   return (
-    <div className="app-container">
-      <h2>Entrar</h2>
-      <form onSubmit={handleSubmit} style={{ maxWidth: 480 }}>
-        <div style={{ marginBottom: 8 }}>
-          <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required />
-        </div>
-        <div style={{ marginBottom: 8 }}>
-          <input type="password" placeholder="Senha" value={password} onChange={e => setPassword(e.target.value)} required />
-        </div>
+    <Container className="app-container" sx={{ py: 3 }}>
+      <Typography component="h2" variant="h5" sx={{ mb: 2 }}>Entrar</Typography>
+      <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 480 }}>
+        <Box sx={{ mb: 1 }}>
+          <input className="submit-input" type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required />
+        </Box>
+        <Box sx={{ mb: 1 }}>
+          <input className="submit-input" type="password" placeholder="Senha" value={password} onChange={e => setPassword(e.target.value)} required />
+        </Box>
         {error && <div className="message error">{error}</div>}
         <div>
-          <button className="submit-button" type="submit">Entrar</button>
+          <UiButton className="submit-button" type="submit">Entrar</UiButton>
         </div>
-      </form>
-    </div>
+      </Box>
+    </Container>
   )
 }
