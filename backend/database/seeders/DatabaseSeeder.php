@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,10 +17,15 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         // Criar usuário de teste apenas se ainda não existir (evita Unique constraint ao re-seedar)
-        if (!User::where('email', 'test@example.com')->exists()) {
+        $adminName = env('DEFAULT_ADMIN_NAME', 'Test User');
+        $adminEmail = env('DEFAULT_ADMIN_EMAIL', 'test@example.com');
+        $adminPassword = env('DEFAULT_ADMIN_PASSWORD', 'password');
+
+        if (! User::where('email', $adminEmail)->exists()) {
             User::factory()->create([
-                'name' => 'Test User',
-                'email' => 'test@example.com',
+                'name' => $adminName,
+                'email' => $adminEmail,
+                'password' => Hash::make($adminPassword),
             ]);
         }
 

@@ -317,8 +317,8 @@ export default function ManageSuggestions() {
                         <div>Nenhuma música cadastrada</div>
                     ) : (
                         <ul className="music-list">
-                            {songs.map(s => (
-                                <li key={s.id} style={{ listStyle: 'none' }}>
+                            {songs.map((s, idx) => (
+                                <li key={s.id ?? s.youtube_link ?? idx} style={{ listStyle: 'none' }}>
                                     <div className="music-card" style={{ alignItems: 'center' }}>
                                         <div className="music-info" style={{ flex: 1 }}>
                                             <>
