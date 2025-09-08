@@ -101,7 +101,6 @@ class SongController extends Controller
                     // ignore
                 }
             }
-            $song->youtube_link = $data['youtube_link'];
         }
 
         $song->save();

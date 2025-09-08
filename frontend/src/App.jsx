@@ -82,7 +82,7 @@ export default function App() {
 
   return (
     <>
-      <Header user={user} onLogout={handleLogout} />
+      <Header user={user} onLogout={handleLogout} page={page} />
       <div className="app-container overlap">
         <main>
           {page === 'manage' ? (

@@ -70,7 +70,7 @@ class SongService
         return $this->repo->create($payload);
     }
 
-    private function extractVideoId(string $url): ?string
+    public function extractVideoId(string $url): ?string
     {
         $patterns = [
             '/v=([\w-]{11})/i',
@@ -87,7 +87,7 @@ class SongService
         return null;
     }
 
-    private function parseViews(string $body): int
+    public function parseViews(string $body): int
     {
         // Try numeric viewCount first
         if (preg_match('/"viewCount"\s*:\s*"(\d+)"/i', $body, $m)) {

@@ -32,7 +32,8 @@ Route::post('/suggestions', [SuggestionController::class, 'store']);
 Route::middleware(['web', 'auth:sanctum'])->group(function () {
     Route::get('/suggestions', [SuggestionController::class, 'index']);
     Route::post('/suggestions/{suggestion}/approve', [SuggestionController::class, 'approve']);
-    Route::put('/suggestions/{suggestion}', [SuggestionController::class, 'update']);
+    Route::post('/suggestions/{suggestion}/reject', [SuggestionController::class, 'reject']);
+    Route::post('/suggestions/{suggestion}/restore', [SuggestionController::class, 'restore']);
+    // Use PATCH for partial updates (title / youtube_link). PUT removed to avoid accidental full-replace semantics.
     Route::patch('/suggestions/{suggestion}', [SuggestionController::class, 'update']);
-    Route::delete('/suggestions/{suggestion}', [SuggestionController::class, 'destroy']);
 });

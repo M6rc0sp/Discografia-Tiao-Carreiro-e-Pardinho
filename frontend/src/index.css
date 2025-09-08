@@ -157,7 +157,74 @@ section h2 {
 	color: white;
 	border: none;
 	padding: .55rem .9rem;
-	border-radius: 6px
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+.submit-button.active {
+	background: #704216;
+	/* slightly darker to indicate active */
+	box-shadow: 0 4px 10px rgba(112, 66, 22, 0.18);
+}
+
+.submit-button.outline {
+	background: transparent;
+	color: #8B4513;
+	border: 1px solid #8B4513;
+}
+
+.submit-button.outline:disabled,
+.submit-button.outline[disabled] {
+	border-color: #e6e6e6;
+	color: #9a9a9a;
+}
+
+/* ensure outlined disabled keeps outlined visual instead of full gray background */
+.submit-button.outline[disabled],
+.submit-button.outline:disabled {
+	background: transparent !important;
+	color: #9a9a9a !important;
+	border-color: #e6e6e6 !important;
+	box-shadow: none !important;
+}
+
+/* Override MUI Button styles when using our CSS classes */
+.submit-button.MuiButton-contained {
+	background: #8B4513 !important;
+	color: #fff !important;
+	box-shadow: none !important;
+}
+
+.submit-button.MuiButton-contained:hover {
+	background: #704216 !important;
+}
+
+.submit-button.MuiButton-outlined {
+	background: transparent !important;
+	color: #8B4513 !important;
+	border-color: #8B4513 !important;
+}
+
+.submit-button.MuiButton-outlined:hover {
+	background: rgba(139, 69, 19, 0.06) !important;
+}
+
+/* Logout button on header should be fully white to contrast with header cover */
+.submit-button.logout {
+	background: #fff !important;
+	color: #8B4513 !important;
+	border: 1px solid rgba(255, 255, 255, 0.9) !important;
+}
+
+.submit-button.logout.MuiButton-contained {
+	background: #fff !important;
+	color: #8B4513 !important;
+}
+
+.submit-button.logout.MuiButton-outlined {
+	background: #fff !important;
+	color: #8B4513 !important;
+	border-color: rgba(255, 255, 255, 0.9) !important;
 }
 
 /* estilo quando o botão está desabilitado (visual de não clicável) */
@@ -183,7 +250,8 @@ section h2 {
 	padding: 1rem;
 	margin-bottom: 1rem;
 	display: flex;
-	align-items: center;
+	align-items: stretch;
+	/* ensure equal height by stretching children */
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06)
 }
 
@@ -208,7 +276,11 @@ section h2 {
 }
 
 .music-info {
-	flex: 1
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	/* push title and views apart so card heights align */
 }
 
 .music-title {
@@ -229,6 +301,54 @@ section h2 {
 	object-fit: cover;
 	border-radius: 6px;
 	margin-left: 1rem
+}
+
+/* make card heights uniform on desktop */
+.music-card {
+	min-height: 96px;
+}
+
+/* grid for the 'rest' list: make items less prominent (two columns on medium+, single on mobile) */
+.rest-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 12px;
+	padding: 0;
+}
+
+.rest-item {
+	list-style: none;
+}
+
+@media (min-width: 700px) {
+	.rest-grid {
+		grid-template-columns: 1fr 1fr;
+		/* col-6 equivalent */
+	}
+
+	.rest-item .music-card {
+		padding: 0.75rem;
+	}
+
+	.rest-item .music-title {
+		font-size: 0.98rem;
+	}
+
+	.rest-item .views {
+		font-size: 0.85rem;
+	}
+
+	.rest-item .thumbnail {
+		width: 80px;
+		height: 44px;
+	}
+}
+
+@media (max-width: 699px) {
+	.rest-grid {
+		grid-template-columns: 1fr;
+		/* col-12 on mobile */
+	}
 }
 
 /* hover e interação */
@@ -258,6 +378,37 @@ section h2 {
 	color: #8a1f1f
 }
 
+.manage-cards {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 12px;
+}
+
+.manage-card {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: white;
+	padding: 12px;
+	border-radius: 8px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.manage-card-main .manage-title {
+	font-weight: 700;
+	color: #2b2b2b;
+}
+
+.manage-card-main .manage-meta {
+	color: #666;
+	font-size: 0.95rem;
+}
+
+.manage-card-actions {
+	display: flex;
+	gap: 8px;
+}
+
 .music-card-link {
 	text-decoration: none;
 	color: inherit;
@@ -281,7 +432,9 @@ section h2 {
 @media (max-width:600px) {
 	.music-card {
 		flex-wrap: wrap;
-		gap: 8px
+		gap: 8px;
+		/* stacked layout: remove fixed min-height so cards size naturally */
+		min-height: 0;
 	}
 
 	.thumbnail {

@@ -107,12 +107,12 @@ export default function Songs() {
       )}
 
       <Typography component="h3" variant="h6" className="section-title">Mais músicas</Typography>
-      <ul className="music-list">
+      <ul className="music-list rest-grid">
         {rest.map((s, i) => {
           const id = s.id ?? `m-${i}`
           const youtube = s.youtube_link || (s.youtube_id ? `https://www.youtube.com/watch?v=${s.youtube_id}` : '#')
           return (
-            <li key={id}>
+            <li key={id} className="rest-item">
               <a className="music-card-link" href={youtube} target="_blank" rel="noopener noreferrer">
                 <div className="music-card">
                   <div className="rank">{5 + i + 1}</div>
@@ -129,9 +129,9 @@ export default function Songs() {
       </ul>
 
       <Box className="pagination" sx={{ mt: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
-        <UiButton className="submit-button" onClick={() => fetchPage(Math.max(1, page - 1))} disabled={page <= 1} aria-disabled={page <= 1}>Anterior</UiButton>
+        <UiButton className={`submit-button ${page <= 1 ? 'outline' : ''}`} onClick={() => fetchPage(Math.max(1, page - 1))} disabled={page <= 1} aria-disabled={page <= 1}>Anterior</UiButton>
         <span> {page} / {totalPages} </span>
-        <UiButton className="submit-button" onClick={() => fetchPage(Math.min(totalPages, page + 1))} disabled={page >= totalPages} aria-disabled={page >= totalPages}>Próxima</UiButton>
+        <UiButton className={`submit-button ${page >= totalPages ? 'outline' : ''}`} onClick={() => fetchPage(Math.min(totalPages, page + 1))} disabled={page >= totalPages} aria-disabled={page >= totalPages}>Próxima</UiButton>
       </Box>
     </Container>
   )

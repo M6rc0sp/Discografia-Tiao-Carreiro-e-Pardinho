@@ -193,6 +193,17 @@ class SuggestionController extends Controller
         return response()->json($suggestion);
     }
 
+    // Restore a rejected suggestion back to pending
+    public function restore(Request $request, Suggestion $suggestion)
+    {
+        $suggestion->status = 'pending';
+        $suggestion->rejected_at = null;
+        $suggestion->approved_at = null;
+        $suggestion->save();
+
+        return response()->json($suggestion);
+    }
+
     private function extractVideoId($url)
     {
         // patterns from v1 sugestir.php

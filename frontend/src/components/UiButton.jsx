@@ -1,10 +1,14 @@
 import React from 'react'
+import Button from '@mui/material/Button'
 
 export default function UiButton({ children, className = '', onClick, type = 'button', ...props }) {
-    // Render a native button so project CSS classes (like .submit-button) apply reliably.
+    // Decide MUI variant from className so outline/solid mapping matches CSS
+    const isOutline = String(className).includes('outline')
+    const variant = isOutline ? 'outlined' : 'contained'
+
     return (
-        <button className={className} onClick={onClick} type={type} {...props}>
+        <Button className={className} onClick={onClick} type={type} variant={variant} {...props} disableElevation>
             {children}
-        </button>
+        </Button>
     )
 }
